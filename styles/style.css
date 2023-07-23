@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Orbitron:wght@400;500;600;700;800;900&family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+.urbanist {
+  font-family: "Urbanist";
+}
+
+.audiowide {
+  font-family: "Audiowide", cursive;
+}
+
+.josefin {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+.orbitron {
+  font-family: "Orbitron", sans-serif;
+}
+
+.rounded {
+  border-radius: 100px;
+}
+
+.flex {
+  display: flex;
+  width: 95%;
+  grid-gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+header {
+  grid-gap: 15px !important;
+  margin: 1.25% auto !important;
+}
+header nav ul {
+  list-style: none;
+  grid-gap: 50px !important;
+}/*# sourceMappingURL=style.css.map */
