@@ -49,10 +49,36 @@
   margin: 0 auto;
 }
 
+@mixin flex100 {
+  display: flex;
+  width: 100%;
+  // grid-gap: 0px;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.flex100 {
+  display: flex;
+  width: 100%;
+  // grid-gap: 0px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
 // end utility
 header {  
   grid-gap: 15px !important;
   margin: 1.25% auto !important;
+  height: 100%;
+  .logoSide {
+    @include flex100;
+    h1 { 
+      @include flex100;
+    }
+  }
   nav {
     ul {
       list-style: none;
@@ -61,3 +87,37 @@ header {
   }  
 }
 
+// Mobile Breakpoint
+@media (min-width: 1000px) {
+  .mobilemenutrigger  {
+    display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  header {
+    margin: 5.01% auto !important;
+    width: 90%  !important;
+    nav {
+      .mobilemenutrigger {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 10px;
+        span {
+          width: 100px;
+          background: black;
+          height: 5px;
+        }
+      }
+      ul {
+        &.collapsed {
+          opacity: 0;
+          pointer-events: none;
+          height: 0;
+        }
+        flex-direction: column;
+        grid-gap: 5px !important;
+      }
+    }
+  }
+}
