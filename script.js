@@ -1,3 +1,4 @@
+let questions = [];
 function getdoc(selector) {
   return document.querySelector(selector);
 }
@@ -24,6 +25,6 @@ let practiceButton = getdoc(`.practiceButton`);
 let aboutButton = getdoc(`.aboutButton`);
 let updatesButton = getdoc(`.updatesButton`);
 
-buttonlink(aboutButton, `./pages/about.html`);
-buttonlink(updatesButton, `./pages/updates.html`);
-buttonlink(practiceButton, `./pages/questions.html`);
+if (aboutButton) buttonlink(aboutButton, `./pages/about.html`);
+if (updatesButton) buttonlink(updatesButton, `./pages/updates.html`);
+if (practiceButton) buttonlink(practiceButton, `./pages/questions.html`);
