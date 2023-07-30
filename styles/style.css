@@ -78,6 +78,40 @@ header nav ul {
   grid-gap: 50px !important;
 }
 
+.grid, .buttonSection, section {
+  display: grid;
+  align-items: center;
+  text-align: center;
+}
+
+section {
+  grid-template-columns: 1fr 1fr;
+}
+section.topButtonSection {
+  min-height: 175px;
+}
+
+.buttonSection {
+  height: 100%;
+  grid-template-rows: 1fr;
+}
+.buttonSection.startqs {
+  min-height: 250px;
+}
+.buttonSection button {
+  border: none;
+  height: 100%;
+}
+.buttonSection button.aboutButton {
+  background: limegreen;
+}
+.buttonSection button.updatesButton {
+  background: pink;
+}
+.buttonSection button.practiceButton {
+  background: #7c8fd5;
+}
+
 @media (min-width: 1000px) {
   .mobilemenutrigger {
     display: none;

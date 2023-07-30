@@ -87,6 +87,42 @@ header {
   }  
 }
 
+.grid { 
+  display: grid;
+  align-items: center;
+  text-align: center;
+}
+
+section {
+  @extend .grid;
+  grid-template-columns: 1fr 1fr;
+  &.topButtonSection {
+    min-height: 175px;
+  }
+}
+
+.buttonSection {
+  height: 100%;
+  @extend .grid;
+  grid-template-rows: 1fr;
+  &.startqs {
+    min-height: 250px;
+  }
+  button {
+    border: none;
+    height: 100%;
+    &.aboutButton {
+      background: limegreen;
+    }
+    &.updatesButton {
+      background: pink;
+    }
+    &.practiceButton {
+      background: #7c8fd5;
+    }
+  }
+}
+
 // Mobile Breakpoint
 @media (min-width: 1000px) {
   .mobilemenutrigger  {
