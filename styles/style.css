@@ -112,6 +112,11 @@ section.topButtonSection {
   background: #7c8fd5;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 @media (min-width: 1000px) {
   .mobilemenutrigger {
     display: none;

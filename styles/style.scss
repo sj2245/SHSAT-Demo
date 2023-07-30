@@ -123,6 +123,10 @@ section {
   }
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
 // Mobile Breakpoint
 @media (min-width: 1000px) {
   .mobilemenutrigger  {
