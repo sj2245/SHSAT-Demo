@@ -8,6 +8,17 @@
   box-sizing: border-box;
 }
 
+body {
+  transition: 600ms ease-in-out;
+  &.dark{
+    background: black;
+    color: white;
+    a {
+      color: white;
+    }
+  }
+}
+
 // utility
 
 // Fonts 
@@ -81,8 +92,14 @@ header {
   }
   nav {
     ul {
+
       list-style: none;
       grid-gap: 50px !important;
+      li {
+        a {
+          cursor: pointer;
+        }
+      }
     }
   }  
 }

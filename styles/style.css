@@ -7,6 +7,17 @@
   box-sizing: border-box;
 }
 
+body {
+  transition: 600ms ease-in-out;
+}
+body.dark {
+  background: black;
+  color: white;
+}
+body.dark a {
+  color: white;
+}
+
 .bold {
   font-weight: 900;
 }
@@ -76,6 +87,9 @@ header .logoSide h1 {
 header nav ul {
   list-style: none;
   grid-gap: 50px !important;
+}
+header nav ul li a {
+  cursor: pointer;
 }
 
 .grid, .buttonSection, section {

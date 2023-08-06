@@ -7,13 +7,19 @@ let question = {
   tags: [`Breaking Bad`, `Coke`, `Healthy Sugar`, `Chemistry`]
 }
 
-questions = [question, question, question, {
+questions = [question, {
   id: 2,
   question: `1 + 1`,
   choices: [`2`, `4`, `3`, `Rakib Ahmed`],
   answers: [`2`],
   tags: [`Basic Math`, `Arithmetic`]
-}];
+}, {
+    id: 3,
+    question: `2 + 2`,
+    choices: [`2`, `4`, `3`, `Rakib Ahmed`],
+    answers: [`4`],
+    tags: [`Basic Math`, `Arithmetic`]
+  }];
 
 if (questions.length > 0) {
   questions.forEach((ques, quesIndex) => {
