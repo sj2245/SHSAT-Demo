@@ -11,6 +11,7 @@
   <script src="../script.js" defer></script>
   <script src="../questions.js" defer></script>
   <title>Questions</title>
+  <link rel="icon" href="../assets/nocap-logo-withbok-circle.png" type="image/x-icon">
 </head>
 <body class="josefin">
 <header class="flex">
@@ -46,8 +47,15 @@
   </nav>
 </header>
   <main>
-    <div class="questionsContainer">
-
+    <div class="qContainer"> 
+      <form action="submit" class="qForm" id="qForm">
+        <h1>Question Generation Form</h1>
+        <input type="text" name="category" placeholder="Enter Category">
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="questionsContainer qContainer"> 
+      <!-- le empty div butt we fil da div wit java skipt -->
     </div>
   </main>
   <!-- <footer>Foot</footer> -->

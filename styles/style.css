@@ -92,6 +92,11 @@ header nav ul li a {
   cursor: pointer;
 }
 
+.qContainer {
+  width: 85%;
+  margin: 30px auto;
+}
+
 .grid, .buttonSection, section {
   display: grid;
   align-items: center;

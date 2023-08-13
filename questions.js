@@ -30,3 +30,11 @@ if (questions.length > 0) {
     questionsContainer.append(questionElement);
   });
 }
+
+const qForm = getdoc(`.qForm`);
+qForm.addEventListener(`submit`, e => {
+  e.preventDefault();
+  console.log(`formsubmit`, e);
+  let category = e.target.category.value;
+  console.log(`category`, category);
+})
