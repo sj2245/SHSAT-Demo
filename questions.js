@@ -32,9 +32,16 @@ if (questions.length > 0) {
 }
 
 const qForm = getdoc(`.qForm`);
-qForm.addEventListener(`submit`, e => {
-  e.preventDefault();
-  console.log(`formsubmit`, e);
-  let category = e.target.category.value;
+qForm.addEventListener(`submit`, qformSubmitevent => {
+  qformSubmitevent.preventDefault();
+  console.log(`formsubmit`, qformSubmitevent);
+  let category = qformSubmitevent.target.category.value;
   console.log(`category`, category);
+  let difficulty = qformSubmitevent.target.difficulty.value;
+  console.log(`difficulty`, difficulty);
+})
+qForm.addEventListener(`input`, qformInputevent => {
+  qformInputevent.preventDefault();
+  console.log(`forminput`, qformInputevent);
+  console.log(`currentInput`, {[qformInputevent.target.name]: qformInputevent.target.value});
 })

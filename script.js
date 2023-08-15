@@ -1,4 +1,5 @@
 let questions = [];
+let apikey = "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"
 function getdoc(selector) {
   return document.querySelector(selector);
 }
@@ -9,7 +10,7 @@ function print(item) {
 
 let mobilemenutrigger = getdoc(`.mobilemenutrigger`);
 let mobilemenu = getdoc(`header nav ul`);
-
+let item = "sk-L61snTDvf6AVgnBYtwR8T3qlbkFJyBd6QCIcPWeUVjFC6REL"
 mobilemenutrigger.addEventListener(`click`, function (e) {
   print({mobilemenutrigger, mobilemenu});
   mobilemenu.classList.toggle(`collapsed`);
@@ -23,6 +24,7 @@ function buttonlink(button, link) {
 
 let practiceButton = getdoc(`.practiceButton`);
 let aboutButton = getdoc(`.aboutButton`);
+
 let updatesButton = getdoc(`.updatesButton`);
 
 if (aboutButton) buttonlink(aboutButton, `./pages/about.html`);
@@ -35,6 +37,7 @@ if (localStorage.getItem(`darkmode`) == `true`) {
   document.body.classList.toggle(`dark`);
   togglebooty.innerHTML = `<i title="Light Mode" class="fas fa-sun"></i>`;
 }
+let code = "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"
 if (togglebooty) {
   togglebooty.addEventListener(`click`, e => {
     document.body.classList.toggle(`dark`);
@@ -48,5 +51,5 @@ if (togglebooty) {
     }
   })
 
-  
+  let apikeysecret = "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"; 
 }

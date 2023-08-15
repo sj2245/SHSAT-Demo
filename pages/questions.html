@@ -48,11 +48,35 @@
 </header>
   <main>
     <div class="qContainer"> 
+
       <form action="submit" class="qForm" id="qForm">
         <h1>Question Generation Form</h1>
-        <input type="text" name="category" placeholder="Enter Category">
+        <select name="category" id="subject">
+          <option value="default">Choose subject</option>
+          <optgroup label="(ELA) English Language Arts">
+            <option value="grammar">Grammar</option>
+            <option value="reading-comp">Reading Comprehension</option>            
+          </optgroup>
+          <optgroup label="Math">
+            <option value="arithmetic">Arithmetic</option>
+            <option value="algebra">Algebra</option>            
+            <option value="geometry">Geometry</option>            
+            <option value="s-and-p">Statistics and Probability</option>            
+          </optgroup>
+        </select>
+        <select name="difficulty" id="Diff">
+          <option value="default">Choose difficulty</option>
+          <option value="very">Very EZ</option>
+          <option value="ez">EZ</option>
+          <option value="simple">Simple</option>
+          <option value="medium">Medium</option>
+          <option value="complicated">Complicated</option>
+          <option value="difficult">Difficult</option>
+          <option value="tryhard">Tryhard</option>
+        </select>
         <button type="submit">Submit</button>
       </form>
+
     </div>
     <div class="questionsContainer qContainer"> 
       <!-- le empty div butt we fil da div wit java skipt -->
