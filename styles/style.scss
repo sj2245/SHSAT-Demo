@@ -109,6 +109,12 @@ header {
   margin: 30px auto;
 }
 
+.qForm {
+  #amount {
+    min-width: 135px;
+  }
+}
+
 .grid { 
   display: grid;
   align-items: center;

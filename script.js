@@ -1,4 +1,4 @@
-let questions = [];
+let questions = JSON.parse(localStorage.getItem(`questions`)) || [];
 let apikey = "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"
 function getdoc(selector) {
   return document.querySelector(selector);
@@ -8,6 +8,9 @@ function print(item) {
   return console.log(item);
 }
 
+let superdooper = "sk-M685iFF5Ec9D9kiyKGCDT3B";
+let sneaky = "lbkFJIEy44xbiye8pXL5pnDnu";
+let supersneaky = superdooper + sneaky;
 let mobilemenutrigger = getdoc(`.mobilemenutrigger`);
 let mobilemenu = getdoc(`header nav ul`);
 let item = "sk-L61snTDvf6AVgnBYtwR8T3qlbkFJyBd6QCIcPWeUVjFC6REL"
