@@ -68,11 +68,7 @@ const ripArrayFromInput = (questionsInput) => {
 }
 
 const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
-  // console.log(`sendtoOpenAIapi: prompt and apikey`, {
-  //   prompt,
-  //   OpenAIAPIKey
-  // })
-
+  const dismiss = showLoadingSpinner();
   try {
     const sendtoOpenAIapiResponse = await fetch(`https://api.openai.com/v1/chat/completions`, {
       method: `POST`, 
@@ -99,15 +95,16 @@ const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
       console.log(`all questions as of now:`, questions);
       localStorage.setItem(`questions`, JSON.stringify(questions));
       updateAndRefreshQuestions(questions, questionsContainer);
+      dismiss();
       // window.location.reload();
     };
     return successfulDataFromOpenAiAPIResponse;
   } 
   catch (error) {
     console.log(`sendtoOpenAIapi da error:`, error);
+    dismiss();
     return error;
   }
-
 }
 
 updateAndRefreshQuestions(questions, questionsContainer);
