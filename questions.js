@@ -24,12 +24,20 @@ const questionsContainer = getdoc(`.questionsContainer`);
 //   }
 // ];
 
-const updateAndRefreshQuestions = (questions, questionsContainer) => {
+const printQsToSite = (questions, questionsContainer) => {
   if (questions.length > 0) {
     questionsContainer.innerHTML = ``;
     questions.forEach((ques, quesIndex) => {
+
+      let currentDateTimeStamp = formatDate(new Date());
+      let uniqueIndex = questions.length + 1 + quesIndex;
+      let currentDateTimeStampNoSpaces = formatDate(new Date(), `timezoneNoSpaces`);
+      let uuid = generateUniqueID(questions.map(qs => qs?.uuid || qs?.id));
+      let id = `${uniqueIndex}_Question_${currentDateTimeStampNoSpaces}_${uuid}`;
+      let ID = `${uniqueIndex} Question ${currentDateTimeStamp} ${uuid}`;
+
       let questionElement = document.createElement(`div`);
-      questionElement.id = ques.id;
+      questionElement.id = id;
       questionElement.className = `questionElement question`;
       questionElement.innerHTML = ques.question;
       questionsContainer.append(questionElement);
@@ -94,7 +102,7 @@ const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
       GeneratedQS.forEach(GeneratedQ => questions.push(GeneratedQ));
       console.log(`all questions as of now:`, questions);
       localStorage.setItem(`questions`, JSON.stringify(questions));
-      updateAndRefreshQuestions(questions, questionsContainer);
+      printQsToSite(questions, questionsContainer);
       dismiss();
       // window.location.reload();
     };
@@ -107,7 +115,7 @@ const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
   }
 }
 
-updateAndRefreshQuestions(questions, questionsContainer);
+printQsToSite(questions, questionsContainer);
 
 const qForm = getdoc(`.qForm`);
 qForm.addEventListener(`submit`, qformSubmitevent => {

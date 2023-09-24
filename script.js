@@ -190,6 +190,61 @@ const showLoadingSpinner = () => {
   }
 }
 
+const createXML = (xmlString) => {
+  let div = document.createElement(`div`);
+  div.innerHTML = xmlString.trim();
+  return div.firstChild;
+}
+
+const getTimezone = (date) => {
+  const timeZoneString = new Intl.DateTimeFormat(undefined, { timeZoneName: `short` }).format(date);
+  const match = timeZoneString.match(/\b([A-Z]{3,5})\b/);
+  return match ? match[1] : ``;
+}
+
+const formatDate = (date, specificPortion) => {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let ampm = hours >= 12 ? `PM` : `AM`;
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour `0` should be `12`
+  minutes = minutes < 10 ? `0` + minutes : minutes;
+  let strTime = hours + `:` + minutes + ` ` + ampm;
+  let strTimeNoSpaces = hours + `-` + minutes + `-` + ampm;
+  let completedDate = strTime + ` ` + (date.getMonth() + 1) + `/` + date.getDate() + `/` + date.getFullYear();
+  let timezone = getTimezone(date);
+
+  if (specificPortion == `time`) {
+    completedDate = strTime;
+  } else if (specificPortion == `date`) {
+    completedDate = (date.getMonth() + 1) + `-` + date.getDate() + `-` + date.getFullYear();
+  } else if (specificPortion == `timezone`) {
+    completedDate = strTime + ` ` + (date.getMonth() + 1) + `-` + date.getDate() + `-` + date.getFullYear() + ` ` + timezone;
+  } else if (specificPortion == `timezoneNoSpaces`) {
+    completedDate = strTimeNoSpaces + `_` + (date.getMonth() + 1) + `-` + date.getDate() + `-` + date.getFullYear() + `_` + timezone;
+  } else {
+    completedDate = strTime + ` ` + (date.getMonth() + 1) + `-` + date.getDate() + `-` + date.getFullYear() + ` ` + timezone;
+  }
+
+  return completedDate;
+};
+
+const generateUniqueID = (existingIDs) => {
+  const generateID = () => {
+    let id = Math.random().toString(36).substr(2, 9);
+    return Array.from(id).map(char => {
+      return Math.random() > 0.5 ? char.toUpperCase() : char;
+    }).join(``);
+  };
+  let newID = generateID();
+  if (existingIDs && existingIDs.length > 0) {
+    while (existingIDs.includes(newID)) {
+      newID = generateID();
+    }
+  }
+  return newID;
+};
+
 const dismissAlert = () => {
   let isAlertOpen = JSON.parse(localStorage.getItem(`alertOpen`)) == true;
   if (!isAlertOpen) return;
