@@ -24,10 +24,11 @@ const questionsContainer = getdoc(`.questionsContainer`);
 //   }
 // ];
 
-const printQsToSite = (questions, questionsContainer) => {
+const printQuestionsToSite = (questions, questionsContainer) => {
   if (questions.length > 0) {
+    console.log(`questionsQuestion(s)`, questions);
     questionsContainer.innerHTML = ``;
-    questions.forEach((ques, quesIndex) => {
+    questions.forEach((questionObject, quesIndex) => {
 
       let currentDateTimeStamp = formatDate(new Date());
       let uniqueIndex = questions.length + 1 + quesIndex;
@@ -39,7 +40,23 @@ const printQsToSite = (questions, questionsContainer) => {
       let questionElement = document.createElement(`div`);
       questionElement.id = id;
       questionElement.className = `questionElement question`;
-      questionElement.innerHTML = ques.question;
+
+      // questionElement.innerHTML = questionObject.question;
+      // ^ Currently, we are inserting the question right into the element
+
+      // We need to modify this to include more data in each question
+      // Some of the things we need are
+      // Text of the Question, and the Answers
+      // Let's make the answers buttons, so the user can click on which answer they think is correct
+      questionElement.innerHTML = `${quesIndex + 1}. ${questionObject.question}`;
+
+      // Whenever we have items in an array, we want to put them in a container class
+      // Let's create the answers container
+      let answersContainer = createXML(`
+        <div class="answersContainer">Answers Container</div>
+      `);
+
+      questionElement.append(answersContainer);
       questionsContainer.append(questionElement);
     });
   } else {
@@ -102,7 +119,7 @@ const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
       GeneratedQS.forEach(GeneratedQ => questions.push(GeneratedQ));
       console.log(`all questions as of now:`, questions);
       localStorage.setItem(`questions`, JSON.stringify(questions));
-      printQsToSite(questions, questionsContainer);
+      printQuestionsToSite(questions, questionsContainer);
       dismiss();
       // window.location.reload();
     };
@@ -115,7 +132,7 @@ const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
   }
 }
 
-printQsToSite(questions, questionsContainer);
+printQuestionsToSite(questions, questionsContainer);
 
 const qForm = getdoc(`.qForm`);
 qForm.addEventListener(`submit`, qformSubmitevent => {
