@@ -53,9 +53,18 @@ const printQuestionsToSite = (questions, questionsContainer) => {
       // Whenever we have items in an array, we want to put them in a container class
       // Let's create the answers container
       let answersContainer = createXML(`
-        <div class="answersContainer">Answers Container</div>
+        <div class="answersContainer"></div>
       `);
 
+      // Lets grab each answer
+      questionObject.choices.forEach((choice, choiceIdex) => {
+        // Here we have access to each choice of each questions
+        let answerButton = createXML(`<button class="answerButton">${choice}</button>`);
+        answersContainer.append(answerButton);
+      })
+
+      // Append is what we use to take our virtual elements that we make in javascript
+      // And turn them into real elements that we can print to the screen
       questionElement.append(answersContainer);
       questionsContainer.append(questionElement);
     });

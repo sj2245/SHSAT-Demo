@@ -231,3 +231,10 @@ a {
     transform: rotate(360deg);
   }
 }
+
+.answersContainer {
+  grid-template-columns: auto auto;
+  display: grid;
+  padding: 5px;
+  gap: 5px;
+}
