@@ -95,6 +95,9 @@ header nav ul li a {
 .qContainer {
   width: 85%;
   margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
 }
 
 .qForm #amount {
@@ -216,4 +219,16 @@ a {
   display: grid;
   padding: 5px;
   gap: 5px;
+}
+.answersContainer .answerButton {
+  border-radius: 6px;
+  font-weight: 800;
+  font-family: "Josefin Sans";
+  padding: 10px 0;
+  transition: 150ms ease-in-out;
+  cursor: crosshair;
+}
+.answersContainer .answerButton:hover {
+  color: white;
+  background: black;
 }/*# sourceMappingURL=style.css.map */

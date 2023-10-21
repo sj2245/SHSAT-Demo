@@ -26,7 +26,7 @@ const questionsContainer = getdoc(`.questionsContainer`);
 
 const printQuestionsToSite = (questions, questionsContainer) => {
   if (questions.length > 0) {
-    console.log(`questionsQuestion(s)`, questions);
+    console.log(`Question(s)`, questions);
     questionsContainer.innerHTML = ``;
     questions.forEach((questionObject, quesIndex) => {
 
@@ -68,6 +68,9 @@ const printQuestionsToSite = (questions, questionsContainer) => {
       questionElement.append(answersContainer);
       questionsContainer.append(questionElement);
     });
+
+    let answerButtons = document.querySelectorAll(`.answerButton`);
+    console.log(`answerButtons`, answerButtons);
   } else {
     questionsContainer.innerHTML = `❌ No questions yet!`;
   }
