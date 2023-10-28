@@ -30,15 +30,15 @@ const printQuestionsToSite = (questions, questionsContainer) => {
     questionsContainer.innerHTML = ``;
     questions.forEach((questionObject, quesIndex) => {
 
-      let currentDateTimeStamp = formatDate(new Date());
-      let uniqueIndex = questions.length + 1 + quesIndex;
-      let currentDateTimeStampNoSpaces = formatDate(new Date(), `timezoneNoSpaces`);
-      let uuid = generateUniqueID(questions.map(qs => qs?.uuid || qs?.id));
-      let id = `${uniqueIndex}_Question_${currentDateTimeStampNoSpaces}_${uuid}`;
-      let ID = `${uniqueIndex} Question ${currentDateTimeStamp} ${uuid}`;
+      // let currentDateTimeStamp = formatDate(new Date());
+      // let uniqueIndex = questions.length + 1 + quesIndex;
+      // let currentDateTimeStampNoSpaces = formatDate(new Date(), `timezoneNoSpaces`);
+      // let uuid = generateUniqueID(questions.map(qs => qs?.uuid || qs?.id));
+      // let id = `${uniqueIndex}_Question_${currentDateTimeStampNoSpaces}_${uuid}`;
+      // let ID = `${uniqueIndex} Question ${currentDateTimeStamp} ${uuid}`;
 
       let questionElement = document.createElement(`div`);
-      questionElement.id = id;
+      questionElement.id = questionObject.id;
       questionElement.className = `questionElement question`;
 
       // questionElement.innerHTML = questionObject.question;
@@ -70,7 +70,25 @@ const printQuestionsToSite = (questions, questionsContainer) => {
     });
 
     let answerButtons = document.querySelectorAll(`.answerButton`);
-    console.log(`answerButtons`, answerButtons);
+    answerButtons.forEach((ansButton, ansButtonIndex) => {
+      ansButton.addEventListener(`click`, event => {
+        let buttonWeClicked = event.target;
+        let questionWeClicked = buttonWeClicked.parentElement.parentElement;
+        let questionFromDatabase = questions.find(q => q.id == questionWeClicked.id);
+        let answerWeChose = buttonWeClicked.innerHTML;
+        let correctAnswers = questionFromDatabase.correctAnswers
+
+        if (correctAnswers.includes(answerWeChose)) {
+          buttonWeClicked.classList.add(`correct`);
+          setTimeout(() => buttonWeClicked.classList.remove(`correct`), 1000);
+          console.log(`${answerWeChose} is correct!`);
+        } else {
+          buttonWeClicked.classList.add(`wrong`);
+          setTimeout(() => buttonWeClicked.classList.remove(`wrong`), 1000);
+          console.log(`${answerWeChose} is wrong!`);
+        }
+      })
+    })
   } else {
     questionsContainer.innerHTML = `❌ No questions yet!`;
   }
@@ -121,15 +139,21 @@ const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
     const successfulDataFromOpenAiAPIResponse = await sendtoOpenAIapiResponse.json();
     const OpenAiAPIResponseMessage = successfulDataFromOpenAiAPIResponse.choices[0].message.content;
     const GeneratedQS = ripArrayFromInput(OpenAiAPIResponseMessage);
-    console.log(`successfulDataFromOpenAiAPIResponse`, successfulDataFromOpenAiAPIResponse);
-    console.log(`OpenAiAPIResponseMessage`, OpenAiAPIResponseMessage);
-    console.log(`GeneratedQS`, ripArrayFromInput(OpenAiAPIResponseMessage));
+    // console.log(`successfulDataFromOpenAiAPIResponse`, successfulDataFromOpenAiAPIResponse);
+    // console.log(`OpenAiAPIResponseMessage`, OpenAiAPIResponseMessage);
+    console.log(`Generated Questions`, GeneratedQS);
     if (GeneratedQS.length > 0) {
       // We only want to push into our questions database if the generated questions are over 0
       // We dont want to overwrite the previous questions in the database, we just want to add onto the end
       // questions.concat(GeneratedQS);
+      GeneratedQS.map((GeneratedQ, GenerateQIndex) => {
+        let currentDateTimeStampNoSpaces = formatDate(new Date(), `timezoneNoSpaces`);
+        let uuid = generateUniqueID(questions.map(qs => qs?.uuid || qs?.id));
+        let id = `${GeneratedQ.id}_Question_${currentDateTimeStampNoSpaces}_${uuid}`;
+        GeneratedQ.id = id;
+        return GeneratedQ;
+      });
       GeneratedQS.forEach(GeneratedQ => questions.push(GeneratedQ));
-      console.log(`all questions as of now:`, questions);
       localStorage.setItem(`questions`, JSON.stringify(questions));
       printQuestionsToSite(questions, questionsContainer);
       dismiss();

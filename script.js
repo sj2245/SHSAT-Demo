@@ -229,6 +229,23 @@ const formatDate = (date, specificPortion) => {
   return completedDate;
 };
 
+const getFormattedDateTime = () => {
+  const now = new Date();
+
+  let hours = now.getHours();
+  const period = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12; // Convert to 12-hour format and handle midnight as 12 AM
+
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+
+  const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+  const day = now.getDate().toString().padStart(2, '0');
+  const year = now.getFullYear();
+
+  return `${hours}:${minutes}:${seconds}-${period}-${month}-${day}-${year}`;
+}
+
 const generateUniqueID = (existingIDs) => {
   const generateID = () => {
     let id = Math.random().toString(36).substr(2, 9);

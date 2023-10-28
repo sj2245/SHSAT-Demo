@@ -253,3 +253,55 @@ a {
     }
   }
 }
+
+.correct {
+  animation: correctAnswer 750ms;
+}
+
+.wrong {
+  animation: wrongAnswer 750ms;
+}
+
+@keyframes correctAnswer {
+  0% {
+    color: white;
+    background: green;
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(0, -5px);
+  }
+  50% {
+    transform: translate(0, -10px);
+  }
+  75% {
+    background: green;
+    transform: translate(0, -5px);
+  }
+  100% {
+    background: black;
+    transform: translate(0);
+  }
+}
+
+@keyframes wrongAnswer {
+  0% {
+    color: white;
+    background: red;
+    transform: translate(-5px);
+  }
+  25% {
+    transform: translate(0px);
+  }
+  50% {
+    transform: translate(5px);
+  }
+  75% {
+    background: red;
+    transform: translate(0px);
+  }
+  100% {
+    background: black;
+    transform: translate(0);
+  }
+}
