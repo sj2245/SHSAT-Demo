@@ -94,10 +94,16 @@ header nav ul li a {
 
 .qContainer {
   width: 85%;
-  margin: 30px auto;
   display: flex;
-  flex-direction: column;
+  margin: 30px auto;
   grid-gap: 20px;
+}
+.qContainer.questionsContainer {
+  flex-direction: column;
+}
+.qContainer:not(.questionsContainer) {
+  justify-content: space-between;
+  align-items: center;
 }
 
 .qForm #amount {

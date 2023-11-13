@@ -106,10 +106,16 @@ header {
 
 .qContainer {
   width: 85%;
-  margin: 30px auto;
   display: flex;
-  flex-direction: column;
+  margin: 30px auto;
   grid-gap: 20px;
+  &.questionsContainer {
+    flex-direction: column;
+  }
+  &:not(.questionsContainer) {
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .qForm {
