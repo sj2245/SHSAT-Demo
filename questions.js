@@ -1,4 +1,5 @@
 const questionsContainer = getdoc(`.questionsContainer`); 
+const scoreElement = getdoc(`.scoreElement`); 
 // let question = {
 //   id: 1,
 //   question: `who is walter white's friend`,
@@ -82,6 +83,10 @@ const printQuestionsToSite = (questions, questionsContainer) => {
           buttonWeClicked.classList.add(`correct`);
           setTimeout(() => buttonWeClicked.classList.remove(`correct`), 1000);
           console.log(`${answerWeChose} is correct!`);
+          // we need to calculate how many points each question is worth
+          let pointsEachQuestionIsWorth = 100 / questions.length;
+          let currentScore = parseFloat(scoreElement.innerHTML);
+          scoreElement.innerHTML = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
         } else {
           buttonWeClicked.classList.add(`wrong`);
           setTimeout(() => buttonWeClicked.classList.remove(`wrong`), 1000);
