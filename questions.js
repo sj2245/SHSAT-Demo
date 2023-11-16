@@ -72,10 +72,7 @@ const printQuestionsToSite = (questions, questionsContainer) => {
 
     let answerButtons = document.querySelectorAll(`.answerButton`);
     answerButtons.forEach((ansButton, ansButtonIndex) => {
-      let clicktimes = 0;
       ansButton.addEventListener(`click`, event => {
-        console.log(`A button has been clicked! ${clicktimes}`)
-        
         let buttonWeClicked = event.target;
         let questionWeClicked = buttonWeClicked.parentElement.parentElement;
         let questionFromDatabase = questions.find(q => q.id == questionWeClicked.id);
@@ -83,17 +80,13 @@ const printQuestionsToSite = (questions, questionsContainer) => {
         let correctAnswers = questionFromDatabase.correctAnswers
 
         if (correctAnswers.includes(answerWeChose)) {
-          
           buttonWeClicked.classList.add(`correct`);
           setTimeout(() => buttonWeClicked.classList.remove(`correct`), 1000);
           console.log(`${answerWeChose} is correct!`);
           // we need to calculate how many points each question is worth
           let pointsEachQuestionIsWorth = 100 / questions.length;
           let currentScore = parseFloat(scoreElement.innerHTML);
-          if(clicktimes == 0){
-            scoreElement.innerHTML = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
-          }
-          clicktimes++;
+          scoreElement.innerHTML = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
         } else {
           buttonWeClicked.classList.add(`wrong`);
           setTimeout(() => buttonWeClicked.classList.remove(`wrong`), 1000);
