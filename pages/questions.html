@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome Version 5 -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script src="../script.js" defer></script>
+  <script src="../questions.js" defer></script>
+  <title>Questions</title>
+  <link rel="icon" href="../assets/nocap-logo-withbok-circle.png" type="image/x-icon">
+</head>
+<body class="josefin">
+  <header class="flex">
+    <div class="logoSide">
+      <h1 class="bold">
+        <a href="../">SHLearn</a>
+      </h1>
+    </div>
+    <nav>
+      <div class="hamburger mobilemenutrigger">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="flex collapsed">
+        <li>
+          <a href="./about.html">About</a>
+        </li>
+        <li>
+          <a href="#">API</a>
+        </li>
+        <li>
+          <a href="#">Flashcards</a>
+        </li>
+        <li>
+          <a href="./questions.html">Questions</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+        <li>
+          <a class="togglebooty"> <i title="Dark Mode" class="fas fa-moon"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+
+    <div class="qContainer"> 
+      <form action="submit" class="qForm" id="qForm">
+        <h1>Question Generation Form</h1>
+        <select name="category" id="subject">
+          <option value="default">Choose subject</option>
+          <optgroup label="(ELA) English Language Arts">
+            <option value="grammar">Grammar</option>
+            <option value="reading-comp">Reading Comprehension</option>            
+          </optgroup>
+          <optgroup label="Math">
+            <option value="arithmetic">Arithmetic</option>
+            <option value="algebra">Algebra</option>            
+            <option value="geometry">Geometry</option>            
+            <option value="s-and-p">Statistics and Probability</option>            
+          </optgroup>
+        </select>
+        <select name="difficulty" id="Diff">
+          <option value="default">Choose difficulty</option>
+          <option value="very">Very EZ</option>
+          <option value="ez">EZ</option>
+          <option value="simple">Simple</option>
+          <option value="medium">Medium</option>
+          <option value="complicated">Complicated</option>
+          <option value="difficult">Difficult</option>
+          <option value="tryhard">Tryhard</option>
+        </select>
+        <input type="number" name="amount" id="amount" placeholder="Enter number 3-5" min="3" max="5" required />
+        <button type="submit">Submit</button>
+      </form>
+      <div class="score">Score: <span class="scoreElement">0</span>/100</div>
+    </div>
+
+    <div class="questionsContainer qContainer"> 
+      <!-- le empty div butt we fil da div wit java skipt -->
+    </div>
+  </main>
+  <!-- <footer>Foot</footer> -->
+</body>
+</html>
