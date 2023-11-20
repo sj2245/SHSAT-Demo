@@ -72,30 +72,39 @@ const printQuestionsToSite = (questions, questionsContainer) => {
 
     let answerButtons = document.querySelectorAll(`.answerButton`);
     answerButtons.forEach((ansButton, ansButtonIndex) => {
-      let clickedTimes = 0;
+      // let clickedTimes = 0;
       ansButton.addEventListener(`click`, event => {
         let buttonWeClicked = event.target;
         let questionWeClicked = buttonWeClicked.parentElement.parentElement;
         let questionFromDatabase = questions.find(q => q.id == questionWeClicked.id);
         let answerWeChose = buttonWeClicked.innerHTML;
-        let correctAnswers = questionFromDatabase.correctAnswers
+        let answersContainerOfQuestion = buttonWeClicked.parentElement;
+        let correctAnswers = questionFromDatabase.correctAnswers;
 
         if (correctAnswers.includes(answerWeChose)) {
           buttonWeClicked.classList.add(`correct`);
           setTimeout(() => buttonWeClicked.classList.remove(`correct`), 1000);
-          console.log(`${answerWeChose} is correct!`);
           // we need to calculate how many points each question is worth
           let pointsEachQuestionIsWorth = 100 / questions.length;
           let currentScore = parseFloat(scoreElement.innerHTML);
-          if(clickedTimes == 0){
-            scoreElement.innerHTML = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
-          }
-          clickedTimes++;
+          scoreElement.innerHTML = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
         } else {
           buttonWeClicked.classList.add(`wrong`);
           setTimeout(() => buttonWeClicked.classList.remove(`wrong`), 1000);
-          console.log(`${answerWeChose} is wrong!`);
         }
+
+        // setTimeout(() => {
+          answersContainerOfQuestion.querySelectorAll(`button`).forEach(childButton => {
+            childButton.disabled = true;
+            childButton.style.opacity = 0.75;
+            childButton.poinerEvents = `none`;
+          })
+        // }, 1500)
+
+        // if (clickedTimes == 0) {
+        //   scoreElement.innerHTML = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
+        // }
+        // clickedTimes++;
       })
     })
   } else {
