@@ -201,7 +201,9 @@ qForm.addEventListener(`submit`, qformSubmitevent => {
       this.tip = tip;
       this.id = id;
     }
-  }. Please make each id an integer value that is greater than ${questions.length}. The choices, correctAnswers, and tags should all be arrays of strings with at least one of the correctAnswers being included in the choices array. The answer and correctAnswers can be the same, but correctAnswers is an array that can have multiple strings, while answer is not an array, just the first string value from correctAnswers. Please make sure the category and each tag is no longer than 2 to 3 words, or else please simplify them. multipleCorrectAnswers should be a boolean. The very first character of the response you send back should be [ like the beginning of an array and the very last character of the response should be ] as the end of the array. Do not put the array into an object or have some message before the array, i only want the raw array, please and thank you.`
+  }. Please make each id an integer value that is greater than ${questions.length}. The choices, correctAnswers, and tags should all be arrays of strings with at least one of the correctAnswers being included in the choices array. The answer and correctAnswers can be the same, but correctAnswers is an array that can have multiple strings, while answer is not an array, just the first string value from correctAnswers. Please make sure the category and each tag is no longer than 2 to 3 words, or else please simplify them. multipleCorrectAnswers should be a boolean. The very first character of the response you send back should be [ like the beginning of an array and the very last character of the response should be ] as the end of the array. Do not put the array into an object or have some message before the array, i only want the raw array, please and thank you.
+  
+  Another thing to note, ensure at least one of the answers are correct.`
   sendtoOpenAIapi(openAIAPIQuestionPrompt, supersneaky);
 })
 // qForm.addEventListener(`input`, qformInputevent => {
