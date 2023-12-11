@@ -1,5 +1,12 @@
 const questionsContainer = getdoc(`.questionsContainer`); 
-const scoreElement = getdoc(`.scoreElement`); 
+const scoreElement = getdoc(`.scoreElement`);
+
+let gameStartSession = {
+  score: 0,
+  answered: 0,
+  questions: questions.length,
+};
+
 // let question = {
 //   id: 1,
 //   question: `who is walter white's friend`,
@@ -40,7 +47,7 @@ const printQuestionsToSite = (questions, questionsContainer) => {
 
       let questionElement = document.createElement(`div`);
       questionElement.id = questionObject.id;
-      questionElement.className = `questionElement question`;
+      questionElement.className = `questionElement question ${quesIndex == questions.length - 1 ? `lastQuestion` : ``}`;
 
       // questionElement.innerHTML = questionObject.question;
       // ^ Currently, we are inserting the question right into the element
@@ -70,6 +77,8 @@ const printQuestionsToSite = (questions, questionsContainer) => {
       questionsContainer.append(questionElement);
     });
 
+    let gameSession = gameStartSession;
+
     let answerButtons = document.querySelectorAll(`.answerButton`);
     answerButtons.forEach((ansButton, ansButtonIndex) => {
       // let clickedTimes = 0;
@@ -81,6 +90,8 @@ const printQuestionsToSite = (questions, questionsContainer) => {
         let answersContainerOfQuestion = buttonWeClicked.parentElement;
         let correctAnswers = questionFromDatabase.correctAnswers;
 
+        gameSession.answered = gameSession.answered + 1;
+
         if (correctAnswers.includes(answerWeChose)) {
           buttonWeClicked.classList.add(`correct`);
           setTimeout(() => buttonWeClicked.classList.remove(`correct`), 1000);
@@ -89,23 +100,46 @@ const printQuestionsToSite = (questions, questionsContainer) => {
           let currentScore = parseFloat(scoreElement.innerHTML);
           let calculatedScore = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
           let roundedScore = Math.ceil(calculatedScore / 1) * 1;
-          scoreElement.innerHTML = calculatedScore >= 99.01 ? roundedScore : calculatedScore;
+          let scoreToStore = calculatedScore >= 99.01 ? roundedScore : calculatedScore;
+
+          scoreElement.innerHTML = scoreToStore;
+          gameSession.score = scoreToStore;
         } else {
           buttonWeClicked.classList.add(`wrong`);
           setTimeout(() => buttonWeClicked.classList.remove(`wrong`), 1000);
         }
 
-        // setTimeout(() => {
-          answersContainerOfQuestion.querySelectorAll(`button`).forEach(childButton => {
-            childButton.disabled = true;
-            childButton.classList.add(`disabled`);
-          })
-        // }, 1500)
+        answersContainerOfQuestion.querySelectorAll(`button`).forEach(childButton => {
+          childButton.disabled = true;
+          childButton.classList.add(`disabled`);
 
-        // if (clickedTimes == 0) {
-        //   scoreElement.innerHTML = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
-        // }
-        // clickedTimes++;
+          if (gameSession.answered == questions.length) {
+            console.log(`Last Question Answered`);
+            console.log(`Show Game Over Screen`, gameSession);
+
+            showAlert(
+              `
+                <div class="GameOverScreen">
+                  <h2>Game Over,</h2>
+                  <br>
+                  <br>
+                  Your Final Score was ${gameSession.score},
+                  After answering ${gameSession.answered} Questions.
+                  <br>
+                  <br>
+                  Would you like to save your score?
+                  <br>
+                  <br>
+                  <form id="saveScoreForm" class="saveScoreForm" method="submit">
+                    <input type="text" name="name" placeholder="Enter Your Name..." />
+                    <input type="email" name="email" placeholder="Enter Your Email..." />
+                    <button type="submit">Save Score</button>
+                  </form>
+                </div>
+              `
+            );
+          }
+        })
       })
     })
   } else {

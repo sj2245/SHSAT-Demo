@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --alertBackgroundOpacityColor: rgba(102, 102, 102, 0.75);
+}
+
 body {
   transition: 600ms ease-in-out;
   &.dark{
@@ -16,6 +20,13 @@ body {
     a {
       color: white;
     }
+  }
+}
+
+form {
+  select, input, button {
+    padding: 5px;
+    border-radius: 4px;
   }
 }
 

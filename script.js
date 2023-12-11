@@ -107,7 +107,7 @@ const showAlert = (element, width = `85%`, height = `auto`, withButton = true, t
   alert.style.backdropFilter = `blur(5px)`;
   alert.style.transition = `opacity 0.3s ease-out`;
   // alert.style.background = `rgba(0, 40, 46, 0.5)`;
-  alert.style.background = `var(--lightCorrectTransparent)`;
+  alert.style.background = `var(--alertBackgroundOpacityColor)`;
 
   // Add styles
   closeButton.style.top = `15px`;
