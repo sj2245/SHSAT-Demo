@@ -87,7 +87,9 @@ const printQuestionsToSite = (questions, questionsContainer) => {
           // we need to calculate how many points each question is worth
           let pointsEachQuestionIsWorth = 100 / questions.length;
           let currentScore = parseFloat(scoreElement.innerHTML);
-          scoreElement.innerHTML = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
+          let calculatedScore = (currentScore + pointsEachQuestionIsWorth).toFixed(2);
+          let roundedScore = Math.ceil(calculatedScore / 1) * 1;
+          scoreElement.innerHTML = calculatedScore >= 99.01 ? roundedScore : calculatedScore;
         } else {
           buttonWeClicked.classList.add(`wrong`);
           setTimeout(() => buttonWeClicked.classList.remove(`wrong`), 1000);
@@ -96,8 +98,7 @@ const printQuestionsToSite = (questions, questionsContainer) => {
         // setTimeout(() => {
           answersContainerOfQuestion.querySelectorAll(`button`).forEach(childButton => {
             childButton.disabled = true;
-            childButton.style.opacity = 0.75;
-            childButton.poinerEvents = `none`;
+            childButton.classList.add(`disabled`);
           })
         // }, 1500)
 

@@ -18,6 +18,12 @@ body.dark a {
   color: white;
 }
 
+.disabled {
+  opacity: 0.75;
+  color: white;
+  pointer-events: none;
+}
+
 .bold {
   font-weight: 900;
 }

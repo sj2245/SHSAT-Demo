@@ -21,6 +21,12 @@ body {
 
 // utility
 
+.disabled {
+  opacity: 0.75;
+  color: white;
+  pointer-events: none;
+}
+
 // Fonts 
 .bold {
   font-weight: 900;
