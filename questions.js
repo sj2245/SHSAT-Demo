@@ -96,8 +96,7 @@ const printQuestionsToSite = (questions, questionsContainer) => {
         // setTimeout(() => {
           answersContainerOfQuestion.querySelectorAll(`button`).forEach(childButton => {
             childButton.disabled = true;
-            childButton.style.opacity = 0.75;
-            childButton.poinerEvents = `none`;
+            childButton.classList.add(`disabled`);
           })
         // }, 1500)
 
