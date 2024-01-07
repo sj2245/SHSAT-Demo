@@ -189,7 +189,15 @@ const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
         messages: [{ role: `user`, content: prompt }]
       })
     })
+
     const successfulDataFromOpenAiAPIResponse = await sendtoOpenAIapiResponse.json();
+    let isValidResponse = (successfulDataFromOpenAiAPIResponse.choices != undefined || successfulDataFromOpenAiAPIResponse.choices != null) && successfulDataFromOpenAiAPIResponse.choices.length > 0;
+
+    if (isValidResponse == false) {
+      dismiss();
+      return;
+    };
+
     const OpenAiAPIResponseMessage = successfulDataFromOpenAiAPIResponse.choices[0].message.content;
     const GeneratedQS = ripArrayFromInput(OpenAiAPIResponseMessage);
     // console.log(`successfulDataFromOpenAiAPIResponse`, successfulDataFromOpenAiAPIResponse);

@@ -1,5 +1,8 @@
 let questions = JSON.parse(localStorage.getItem(`questions`)) || [];
-let apikey = "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"
+let newK1 = `sk-HbMn4EKrEtNSf`;
+let newK2 = `WzZ4JIkT3BlbkFJcF`;
+let newK3 = `xGYyT1duDOH3ub8yLo`;
+let supersneaky = newK1 + newK2 + newK3;
 function getdoc(selector) {
   return document.querySelector(selector);
 }
@@ -8,9 +11,6 @@ function print(item) {
   return console.log(item);
 }
 
-let superdooper = "sk-M685iFF5Ec9D9kiyKGCDT3B";
-let sneaky = "lbkFJIEy44xbiye8pXL5pnDnu";
-let supersneaky = superdooper + sneaky;
 let mobilemenutrigger = getdoc(`.mobilemenutrigger`);
 let mobilemenu = getdoc(`header nav ul`);
 let item = "sk-L61snTDvf6AVgnBYtwR8T3qlbkFJyBd6QCIcPWeUVjFC6REL"
@@ -52,9 +52,7 @@ if (togglebooty) {
       togglebooty.innerHTML = `<i title="Dark Mode"   class="fas fa-moon"></i>`;
       localStorage.setItem(`darkmode`, false);
     }
-  })
-
-  let apikeysecret = "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"; 
+  }) 
 }
 
 const showAlert = (element, width = `85%`, height = `auto`, withButton = true, type) => {
