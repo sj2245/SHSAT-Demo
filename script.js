@@ -152,16 +152,22 @@ const showAlert = (element, width = `85%`, height = `auto`, withButton = true, t
   });
 
   // Add a click event listener to the overlay to dismiss the alert
-  overlay.addEventListener(`click`, () => {
+  overlay.addEventListener(`click`, (onClickEvent) => {
     // Fade out the alert and overlay
-    if (alert) alert.style.opacity = 0;
-    if (overlay && overlay.style.opacity != 0) overlay.style.opacity = 0;
+    // I want to check if the element im clicking on is ANY child of the overlay, if not, and im clicking on the overlay itself, dismiss it
 
-    // Remove the alert and overlay from the DOM after the animation is complete
-    setTimeout(() => {
-      if (overlay && document.querySelector(`.overlay`)) document.body.removeChild(overlay);
-      localStorage.setItem(`alertOpen`, false);
-    }, 300);
+    let closeOnOverlayClickNotChildren = !withButton;
+    if (closeOnOverlayClickNotChildren == true && onClickEvent.target.classList.contains(`overlay`)) {
+      if (alert) alert.style.opacity = 0;
+      if (overlay && overlay.style.opacity != 0) overlay.style.opacity = 0;
+
+      // Remove the alert and overlay from the DOM after the animation is complete
+      setTimeout(() => {
+        console.log(`Closing Modal from Overlay Click`, { overlay, onClickEvent });
+        if (overlay && document.querySelector(`.overlay`)) document.body.removeChild(overlay);
+        localStorage.setItem(`alertOpen`, false);
+      }, 300);
+    }
   });
 }
 

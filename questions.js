@@ -136,7 +136,7 @@ const printQuestionsToSite = (questions, questionsContainer) => {
                     <button type="submit">Save Score</button>
                   </form>
                 </div>
-              `
+              `, 
             );
           }
         })
@@ -229,7 +229,11 @@ const sendtoOpenAIapi = async (prompt, OpenAIAPIKey) => {
   }
 }
 
-printQuestionsToSite(questions, questionsContainer);
+const refreshQuiz = (questions = JSON.parse(localStorage.getItem(`questions`)) || []) => {
+  printQuestionsToSite(questions, questionsContainer);
+}
+
+refreshQuiz();
 
 const qForm = getdoc(`.qForm`);
 qForm.addEventListener(`submit`, qformSubmitevent => {
