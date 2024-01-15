@@ -4,6 +4,8 @@ const scoreElement = getdoc(`.scoreElement`);
 let gameStartSession = {
   score: 0,
   answered: 0,
+  difficulties: [],
+  difficultyScore: 0,
   questions: questions.length,
 };
 
@@ -31,6 +33,42 @@ let gameStartSession = {
 //     tags: [`Basic Math`, `Arithmetic`]
 //   }
 // ];
+
+const calculateScoreBasedOnDifficulties = (arrayOfDifficulties) => {
+
+  console.log(`arrayOfDifficulties`, arrayOfDifficulties);
+
+  let scoreMultiplier = 10;
+
+  let scoreToReturnArray = arrayOfDifficulties.map(diff => {
+
+    let difficultyScore = 0;
+
+    if (diff == `Very Easy`) {
+      difficultyScore + 1;
+    } else if (diff == `Easy`) {
+      difficultyScore + 2;
+    } else if (diff == `Simple`) {
+      difficultyScore + 3;
+    } else if (diff == `Medium`) {
+      difficultyScore + 4;
+    } else if (diff == `Complicated`) {
+      difficultyScore + 5;
+    } else if (diff == `Difficult`) {
+      difficultyScore + 6;
+    } else if (diff == `Tryhard`) {
+      difficultyScore + 7;
+    }
+
+    return difficultyScore;
+  });
+
+  let scoreToReturn = scoreToReturnArray.reduce((acc, currentVal) => acc + currentVal) * scoreMultiplier;
+
+  console.log(`Calc Diff Score`, { scoreToReturn, scoreToReturnArray });
+
+  return scoreToReturn;
+}
 
 const printQuestionsToSite = (questions, questionsContainer) => {
   if (questions.length > 0) {
@@ -89,8 +127,13 @@ const printQuestionsToSite = (questions, questionsContainer) => {
         let answerWeChose = buttonWeClicked.innerHTML;
         let answersContainerOfQuestion = buttonWeClicked.parentElement;
         let correctAnswers = questionFromDatabase.correctAnswers;
-
+        
         gameSession.answered = gameSession.answered + 1;
+        gameSession.difficulties.push(questionFromDatabase.difficulty);
+        gameSession.difficultyScore = calculateScoreBasedOnDifficulties(gameSession.difficulties);
+        
+        console.log(`Question We Answered`, questionFromDatabase);
+        console.log(`Game Session`, gameSession);
 
         if (correctAnswers.includes(answerWeChose)) {
           buttonWeClicked.classList.add(`correct`);
@@ -131,13 +174,33 @@ const printQuestionsToSite = (questions, questionsContainer) => {
                   <br>
                   <br>
                   <form id="saveScoreForm" class="saveScoreForm" method="submit">
-                    <input type="text" name="name" placeholder="Enter Your Name..." />
-                    <input type="email" name="email" placeholder="Enter Your Email..." />
+                    <input type="text" class="name" name="name" placeholder="Enter Your Name..." />
+                    <input type="email" class="email" name="email" placeholder="Enter Your Email..." />
                     <button type="submit">Save Score</button>
                   </form>
                 </div>
               `, 
             );
+
+            let saveScoreForm = getdoc(`.saveScoreForm`);
+            saveScoreForm.addEventListener(`submit`, (saveScoreFormSubmitEvent) => {
+              saveScoreFormSubmitEvent.preventDefault();
+
+              let { name: nameField, email: emailField } = saveScoreFormSubmitEvent.target;
+
+              let scoreToSave = {
+                ...gameSession,
+                name: nameField.value,
+                email: emailField.value,
+                date: new Date().toLocaleString(),
+              }
+
+              console.log(`saveScoreFormSubmitEvent`, scoreToSave);
+
+              // let highScores = [];
+
+              // highScores.push();
+            })
           }
         })
       })
