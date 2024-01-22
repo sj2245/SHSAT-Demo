@@ -1,11 +1,45 @@
 const questionsContainer = getdoc(`.questionsContainer`); 
 const scoreElement = getdoc(`.scoreElement`);
 
+let highScores = JSON.parse(localStorage.getItem(`highscores`)) || [];
+console.log(`Highscores`, highScores);
+
+let highScoresList = getdoc(`.highScoresList`);
+let highScoresLink = getdoc(`.highScoresLink`);
+
+const showHideScores = (delay) => {
+  setTimeout(() => {
+    highScoresList.classList.toggle(`hideThisList`);
+  }, delay)
+}
+
+const toggleScores = () => {
+  showHideScores(1);
+  showHideScores(2000);
+}
+
+if (highScoresLink) {
+  highScoresLink.addEventListener(`mouseover`, (mouseOverEvent) => {
+    toggleScores();
+  })
+}
+
+if (highScoresList) {
+  highScores.forEach(scor => {
+    let scoreElement = document.createElement(`div`);
+    scoreElement.className = `scoreElement`;
+    scoreElement.innerHTML = `<i class="fas fa-signal" style="color: skyblue"></i> ${scor.name} - ${scor.score}% on ${scor.date}`;
+
+    highScoresList.append(scoreElement);
+  })
+  toggleScores();
+}
+
 let gameStartSession = {
   score: 0,
   answered: 0,
   difficulties: [],
-  difficultyScore: 0,
+  points: 0,
   questions: questions.length,
 };
 
@@ -36,36 +70,32 @@ let gameStartSession = {
 
 const calculateScoreBasedOnDifficulties = (arrayOfDifficulties) => {
 
-  console.log(`arrayOfDifficulties`, arrayOfDifficulties);
-
   let scoreMultiplier = 10;
 
   let scoreToReturnArray = arrayOfDifficulties.map(diff => {
 
-    let difficultyScore = 0;
+    let points = 0;
 
     if (diff == `Very Easy`) {
-      difficultyScore + 1;
+      points = points + 1;
     } else if (diff == `Easy`) {
-      difficultyScore + 2;
+      points = points + 2;
     } else if (diff == `Simple`) {
-      difficultyScore + 3;
+      points = points + 3;
     } else if (diff == `Medium`) {
-      difficultyScore + 4;
+      points = points + 4;
     } else if (diff == `Complicated`) {
-      difficultyScore + 5;
+      points = points + 5;
     } else if (diff == `Difficult`) {
-      difficultyScore + 6;
+      points = points + 6;
     } else if (diff == `Tryhard`) {
-      difficultyScore + 7;
+      points = points + 7;
     }
 
-    return difficultyScore;
+    return points;
   });
 
   let scoreToReturn = scoreToReturnArray.reduce((acc, currentVal) => acc + currentVal) * scoreMultiplier;
-
-  console.log(`Calc Diff Score`, { scoreToReturn, scoreToReturnArray });
 
   return scoreToReturn;
 }
@@ -130,7 +160,7 @@ const printQuestionsToSite = (questions, questionsContainer) => {
         
         gameSession.answered = gameSession.answered + 1;
         gameSession.difficulties.push(questionFromDatabase.difficulty);
-        gameSession.difficultyScore = calculateScoreBasedOnDifficulties(gameSession.difficulties);
+        gameSession.points = calculateScoreBasedOnDifficulties(gameSession.difficulties);
         
         console.log(`Question We Answered`, questionFromDatabase);
         console.log(`Game Session`, gameSession);
@@ -181,28 +211,29 @@ const printQuestionsToSite = (questions, questionsContainer) => {
                 </div>
               `, 
             );
-
-            let saveScoreForm = getdoc(`.saveScoreForm`);
-            saveScoreForm.addEventListener(`submit`, (saveScoreFormSubmitEvent) => {
-              saveScoreFormSubmitEvent.preventDefault();
-
-              let { name: nameField, email: emailField } = saveScoreFormSubmitEvent.target;
-
-              let scoreToSave = {
-                ...gameSession,
-                name: nameField.value,
-                email: emailField.value,
-                date: new Date().toLocaleString(),
-              }
-
-              console.log(`saveScoreFormSubmitEvent`, scoreToSave);
-
-              // let highScores = [];
-
-              // highScores.push();
-            })
           }
         })
+
+        let saveScoreForm = getdoc(`.saveScoreForm`);
+        if (saveScoreForm) {
+          saveScoreForm.addEventListener(`submit`, (saveScoreFormSubmitEvent) => {
+            saveScoreFormSubmitEvent.preventDefault();
+
+            let { name: nameField, email: emailField } = saveScoreFormSubmitEvent.target;
+
+            let scoreToSave = {
+              ...gameSession,
+              name: nameField.value,
+              date: new Date().toLocaleString(),
+              id: `score-${highScores.length + 1}`,
+              email: emailField.value.toLowerCase(),
+            }
+
+            highScores.push(scoreToSave);
+            console.log(`Score Saved`, { scoreToSave, highScores });
+            localStorage.setItem(`highscores`, JSON.stringify(highScores));
+          })
+        }
       })
     })
   } else {

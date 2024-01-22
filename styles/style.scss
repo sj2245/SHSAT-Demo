@@ -96,6 +96,38 @@ form {
   margin: 0 auto;
 }
 
+.highScoresLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  grid-gap: 7px;
+}
+
+.highScoresLink i {
+  position: relative;
+  top: -2px;
+}
+
+.highScoresList {
+  position: absolute;
+  width: 350px;
+  top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  left: -57px;
+  border: 1px solid white;
+  padding: 15px;
+  background: black;
+  border-radius: 10px;
+  transition: 150ms ease-in-out;
+  &.hideThisList {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 // end utility
 header {  
   grid-gap: 15px !important;
@@ -109,7 +141,8 @@ header {
   }
   nav {
     ul {
-
+      right: 10px;
+      position: relative;
       list-style: none;
       grid-gap: 50px !important;
       li {
