@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Font Awesome Version 5 -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <link rel="stylesheet" href="./styles/style.css" />  
-  <script src="./script.js" defer></script>
-  <title>SHSAT Demo</title>
-  <link rel="icon" href="./assets/nocap-logo-withbok-circle.png" type="image/x-icon">
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script src="../script.js" defer></script>
+  <script src="../flashcards.js" defer></script>
+  <title>Flashcards</title>
+  <link rel="icon" href="../assets/nocap-logo-withbok-circle.png" type="image/x-icon">
 </head>
+
 <body class="josefin">
   <header class="flex">
     <div class="logoSide">
       <h1 class="bold">
-        <a href="./">SHLearn</a>
+        <a href="../">SHLearn</a>
       </h1>
     </div>
     <nav>
@@ -23,17 +26,21 @@
         <span></span><span></span><span></span>
       </div>
       <ul class="flex collapsed">
+        <!-- <li>
+          <a class="highScoresLink" href="#"><i class="fas fa-signal" style="color: skyblue"></i> Highscores</a>
+          <div class="highScoresList hideThisList"></div>
+        </li> -->
         <li>
-          <a href="./pages/about.html">About</a>
+          <a href="./about.html">About</a>
         </li>
         <li>
           <a href="#">API</a>
         </li>
         <li>
-          <a href="./pages/flashcards.html">Flashcards</a>
+          <a href="./flashcards.html">Flashcards</a>
         </li>
         <li>
-          <a href="./pages/questions.html">Questions</a>
+          <a href="./questions.html">Questions</a>
         </li>
         <li>
           <a href="#">Contact</a>
@@ -44,19 +51,14 @@
       </ul>
     </nav>
   </header>
-  <section class="topButtonSection">
-    <div class="aboutlink buttonSection">
-      <button class="josefin aboutButton">About</button>
-    </div>
-    <div class="updateslink buttonSection">
-      <button class="josefin updatesButton">Updates page</button>
-    </div>
-  </section>
+
   <main>
-    <div class="startqs buttonSection">
-      <button class="josefin practiceButton">Enter practice area!</button>
-    </div>
+    <section class="flashcardsSection">
+      <!-- Dynamically fill with javascript -->
+    </section>
   </main>
+ 
   <!-- <footer>Foot</footer> -->
 </body>
+
 </html>

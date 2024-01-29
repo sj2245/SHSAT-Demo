@@ -112,7 +112,7 @@ form select, form input, form button {
 
 header {
   grid-gap: 15px !important;
-  margin: 1.25% auto !important;
+  margin: 2.25% auto !important;
   height: 100%;
 }
 header .logoSide {
@@ -337,4 +337,48 @@ a {
     background: black;
     transform: translate(0);
   }
+}
+.flashcardsSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  grid-gap: 30px;
+  padding: 35px 0;
+}
+
+.flashcard {
+  min-width: 350px;
+  min-height: 200px;
+  perspective: 1000px;
+  position: relative;
+  cursor: pointer;
+}
+.flashcard .cardFace {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease-in-out;
+}
+.flashcard .front {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
+}
+.flashcard .back {
+  transform: rotateY(-180deg);
+}
+.flashcard.flipped .front {
+  transform: rotateY(-180deg);
+}
+.flashcard.flipped .back {
+  z-index: 3;
+  transform: rotateY(0deg);
 }/*# sourceMappingURL=style.css.map */

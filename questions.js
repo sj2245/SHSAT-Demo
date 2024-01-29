@@ -14,8 +14,10 @@ const showHideScores = (delay) => {
 }
 
 const toggleScores = () => {
-  showHideScores(1);
-  showHideScores(2000);
+  if (highScores.length > 0) {
+    showHideScores(1);
+    showHideScores(2000);
+  }
 }
 
 if (highScoresLink) {
